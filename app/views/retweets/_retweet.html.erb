@@ -1,0 +1,32 @@
+<div id="retweet-<%= retweet.id %>" class="micropost">
+  <div class="content">
+    <div class="avatar-content">
+      <%= link_to retweet.source_tweet.user do %>
+        <%= render 'partials/avatar', user: retweet.source_tweet.user, klass: 'avatar' %>
+      <% end %>
+    </div>
+    <div class="post-content">
+      <span class="name"><%= retweet.source_tweet.user.name %></span>
+      <span class="username">@<%= retweet.source_tweet.user.username %></span>
+      <div class="post">
+        <%= retweet.source_tweet.tweet_text %>
+      </div>
+    </div>
+    <div class="right-content">
+      <span><%= relative_time(retweet.source_tweet.created_at) %></span>
+    </div>
+  </div>
+  <div class="actions">
+    <div class="actions-content">
+      <%= link_to reply_tweet_path(retweet.id), method: :post, remote: true do %>
+        <i class="fa fa-arrow-left"></i>
+      <% end %>
+      <span id="retweet-<%= retweet.id %>">
+        <%= render 'retweets/retweet_button', tweet_id: retweet.source_tweet.id %>
+      </span>
+      <span id="favor-tweet-<%= retweet.id %>">
+        <%= render 'favorites/favorite_button', tweet_id: retweet.id %>
+      </span>
+    </div>
+  </div>
+</div>
